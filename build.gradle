@@ -1,0 +1,91 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id "com.vanniktech.maven.publish" version "0.29.0"
+}
+
+
+group 'com.lontten.canal'
+version '1.1.1.RELEASE'
+//version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+mavenPublishing {
+//    publishToMavenCentral(SonatypeHost.DEFAULT)
+    // or when publishing to https://s01.oss.sonatype.org
+//    publishToMavenCentral(SonatypeHost.S01)
+    // or when publishing to https://central.sonatype.com/
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
+
+    coordinates(rootProject.group, "hello-spring-boot-starter", rootProject.version)
+
+    pom {
+        name = "hello-spring-boot-starter"
+        description = "demo starter ."
+        inceptionYear = "2024"
+        url = "https://github.com/lontten/hello-spring-boot-starter/"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "lontten"
+                name = "lontten"
+                url = "https://github.com/lontten/"
+            }
+        }
+        scm {
+            url = 'https://github.com/lontten/hello-spring-boot-starter/'
+            connection = 'scm:git:git://github.com/lontten/hello-spring-boot-starter.git'
+            developerConnection = 'scm:git:ssh://github.com:lontten/hello-spring-boot-starter.git'
+        }
+    }
+}
+
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/spring' }
+    maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/grails-core' }
+    maven { url 'https://maven.aliyun.com/repository/apache-snapshots' }
+
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 21
+}
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+
+}
