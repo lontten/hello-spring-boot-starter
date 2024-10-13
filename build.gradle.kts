@@ -5,8 +5,8 @@ plugins {
     id("java-library")
     id("com.vanniktech.maven.publish") version "0.29.0"
 }
-group = "com.lontten.canal"
-version = "1.1.1.RELEASE"
+group = "io.github.lontten"
+version = "1.1.2.RELEASE"
 //version = "0.0.1-SNAPSHOT"
 
 java {
@@ -70,7 +70,7 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.guava)
+    api(libs.guava)
     implementation("com.github.hiwepy:canal-spring-boot-starter:3.3.x.20240823.RELEASE")
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
